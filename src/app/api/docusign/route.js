@@ -42,7 +42,7 @@ async function getJWTToken() {
         if (error.response?.data?.error === 'consent_required') {
             console.error('Consent is required. Please grant consent using the following URL:');
             console.error(
-                `https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=${CLIENT_ID}&redirect_uri=https://magnificent-hummingbird-bce99c.netlify.app/ds/callback`
+                `http://account-d.docusign.com/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=${CLIENT_ID}&redirect_uri=https://magnificent-hummingbird-bce99c.netlify.app/ds/callback`
             );
 
         } else {
