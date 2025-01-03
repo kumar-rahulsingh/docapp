@@ -73,7 +73,7 @@ async function createEnvelope({ participants, signingType, base64Content }) {
             emailSubject: 'Please sign this agreement',
             documents: [
                 {
-                    documentBase64: base64Content, // Ensure this is valid base64 content
+                    documentBase64: base64Content, 
                     name: 'Agreement.pdf',
                     fileExtension: 'pdf',
                     documentId: '1',
@@ -150,7 +150,7 @@ export async function POST(request) {
             );
         }
 
-        const base64Content = file.replace(/^data:application\/pdf;base64,/, ''); // Clean base64 string if needed
+        const base64Content = file.replace(/^data:application\/pdf;base64,/, ''); 
 
         const result = await createEnvelope({ participants, signingType, base64Content });
 
