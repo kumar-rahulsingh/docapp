@@ -1,9 +1,8 @@
-
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-// DocuSign credentials from environment variables
+// Load environment variables
 const CLIENT_ID = process.env.CLIENT_ID;
 const ACCOUNT_ID = process.env.ACCOUNT_ID;
 const PRIVATE_KEY = process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
@@ -39,11 +38,10 @@ async function getJWTToken() {
 
         return response.data.access_token;
     } catch (error) {
-
         if (error.response?.data?.error === 'consent_required') {
             console.error('Consent is required. Please grant consent using the following URL:');
             console.error(
-                `https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=${CLIENT_ID}&redirect_uri=https://magnificent-hummingbird-bce99c.netlify.app/ds/callback`
+                `https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature%20impersonation&client_id=${CLIENT_ID}&redirect_uri=http://localhost:3000/ds/callback`
             );
         } else {
             console.error('Error generating JWT token:', error.response?.data || error.message);
@@ -161,6 +159,7 @@ export async function POST(request) {
             result,
         });
     } catch (error) {
+        console.error('Error in POST handler:', error.message);
         return NextResponse.json(
             { error: error.message },
             { status: 500 }
